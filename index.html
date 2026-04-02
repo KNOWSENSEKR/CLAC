@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- saved from url=(0062)file:///C:/Users/blogh/Downloads/stoploss_calculator_v2_4.html -->
+<!-- saved from url=(0062)file:///C:/Users/blogh/Downloads/stoploss_calculator_v2_5.html -->
 <html lang="ko"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -151,7 +151,7 @@ input[type=range].orange::-webkit-slider-thumb{background:var(--lig);box-shadow:
 .result-val.o{color:var(--lig);}
 
 /* 차트 */
-.chart-wrap{position:relative;width:100%;height:240px;margin-bottom:1.25rem;}
+.chart-wrap{position:relative;width:100%;height:240px;min-height:200px;margin-bottom:1.25rem;}
 .section-label{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:10px;}
 
 /* 복구 테이블 */
@@ -190,6 +190,7 @@ input[type=range].orange::-webkit-slider-thumb{background:var(--lig);box-shadow:
 .footer b{color:var(--accent);}
 
 @media(max-width:480px){
+  .chart-wrap{height:220px !important;min-height:180px !important;}
   .cards{grid-template-columns:1fr 1fr;}
   .cards .card:last-child{grid-column:span 2;}
   .hero-title{font-size:22px;}
@@ -256,15 +257,15 @@ input[type=range].orange::-webkit-slider-thumb{background:var(--lig);box-shadow:
 
   <!-- 탭 -->
   <div class="tabs">
-    <button class="tab active" onclick="switchTab(0)">📉 손절가 계산기</button>
+    <button class="tab" onclick="switchTab(0)">📉 손절가 계산기</button>
     <button class="tab" onclick="switchTab(1)">🔁 손실 복구 계산기</button>
-    <button class="tab" onclick="switchTab(2)">🧠 손실 고통 시각화</button>
+    <button class="tab active" onclick="switchTab(2)">🧠 손실 고통 시각화</button>
   </div>
 
   <!-- ══════════════════════════════
        패널 0: 손절가 계산기
   ══════════════════════════════ -->
-  <div class="panel active" id="panel-0">
+  <div class="panel" id="panel-0">
 
     <div class="hero">
       <div class="hero-tag orange" id="p0-tag">오늘 상한가 종목 적용</div>
@@ -274,8 +275,8 @@ input[type=range].orange::-webkit-slider-thumb{background:var(--lig);box-shadow:
 
     <div class="cards">
       <div class="card"><div class="card-label">매수가</div><div class="card-value o" id="c0-buy">₩794,000</div></div>
-      <div class="card hl-r"><div class="card-label">⚠ 손절가</div><div class="card-value r" id="c0-stop">₩730,480</div></div>
-      <div class="card"><div class="card-label">예상 손실금액</div><div class="card-value r" id="c0-loss">-₩635,200</div></div>
+      <div class="card hl-r"><div class="card-label">⚠ 손절가</div><div class="card-value r" id="c0-stop">₩547,860</div></div>
+      <div class="card"><div class="card-label">예상 손실금액</div><div class="card-value r" id="c0-loss">-₩86,395,140</div></div>
     </div>
 
     <!-- 직접 입력 영역 (custom 모드) -->
@@ -296,24 +297,24 @@ input[type=range].orange::-webkit-slider-thumb{background:var(--lig);box-shadow:
       <div class="ctrl">
         <span class="ctrl-label">보유 수량</span>
         <input type="range" min="1" max="1000" step="1" value="10" id="r0-qty" oninput="syncQtyFromSlider()">
-        <span class="ctrl-out g" id="o0-qty">10주</span>
+        <span class="ctrl-out g" id="o0-qty">351주</span>
       </div>
       <div class="ctrl">
         <span class="ctrl-label">손절 기준</span>
         <input type="range" class="red" min="1" max="50" step="0.5" value="8" id="r0-pct" oninput="calcStop()">
-        <span class="ctrl-out r" id="o0-pct">-8.0%</span>
+        <span class="ctrl-out r" id="o0-pct">-31.0%</span>
       </div>
     </div>
 
     <div class="result-box orange">
       <div class="result-row"><span class="result-key">종목명</span><span class="result-val o" id="r0-name">LIG넥스원</span></div>
-      <div class="result-row"><span class="result-key">총 매수금액</span><span class="result-val g" id="r0-total">₩7,940,000</span></div>
-      <div class="result-row"><span class="result-key">손절가 (1주당)</span><span class="result-val r" id="r0-stopprice">₩730,480</span></div>
-      <div class="result-row"><span class="result-key">손절 시 손실금액</span><span class="result-val r" id="r0-lossamount">-₩635,200</span></div>
-      <div class="result-row"><span class="result-key">손절 후 남는 자금</span><span class="result-val y" id="r0-remain">₩7,304,800</span></div>
+      <div class="result-row"><span class="result-key">총 매수금액</span><span class="result-val g" id="r0-total">₩278,694,000</span></div>
+      <div class="result-row"><span class="result-key">손절가 (1주당)</span><span class="result-val r" id="r0-stopprice">₩547,860</span></div>
+      <div class="result-row"><span class="result-key">손절 시 손실금액</span><span class="result-val r" id="r0-lossamount">-₩86,395,140</span></div>
+      <div class="result-row"><span class="result-key">손절 후 남는 자금</span><span class="result-val y" id="r0-remain">₩192,298,860</span></div>
     </div>
 
-    <div class="insight orange" id="insight-stop"><b>LIG넥스원</b> ₩794,000 매수 시 <b class="r">-8.0%</b> 손절가는 <b class="r">₩730,480</b>입니다. 손실금액 <b class="r">₩635,200</b>로 끝낼 수 있어요. 만약 손절 못 하고 <b class="r">-16%</b>까지 버티면 원금 회복에 <b class="r">+19.0%</b>가 필요합니다.</div>
+    <div class="insight orange" id="insight-stop"><b>LIG넥스원</b> ₩794,000 매수 시 <b class="r">-31.0%</b> 손절가는 <b class="r">₩547,860</b>입니다. 손실금액 <b class="r">₩86,395,140</b>로 끝낼 수 있어요. 만약 손절 못 하고 <b class="r">-62%</b>까지 버티면 원금 회복에 <b class="r">+163.2%</b>가 필요합니다.</div>
 
   </div>
 
@@ -329,41 +330,41 @@ input[type=range].orange::-webkit-slider-thumb{background:var(--lig);box-shadow:
     </div>
 
     <div class="cards">
-      <div class="card"><div class="card-label">원금</div><div class="card-value g" id="c1-p">₩10,000,000</div></div>
-      <div class="card hl-r"><div class="card-label">손실 후 잔액</div><div class="card-value r" id="c1-after">₩8,000,000</div></div>
-      <div class="card"><div class="card-label">필요 복구 수익률</div><div class="card-value y" id="c1-need">+25.0%</div></div>
+      <div class="card"><div class="card-label">원금</div><div class="card-value g" id="c1-p">₩70,000,000</div></div>
+      <div class="card hl-r"><div class="card-label">손실 후 잔액</div><div class="card-value r" id="c1-after">₩45,500,000</div></div>
+      <div class="card"><div class="card-label">필요 복구 수익률</div><div class="card-value y" id="c1-need">+53.8%</div></div>
     </div>
 
     <div class="controls">
       <div class="ctrl">
         <span class="ctrl-label">투자 원금</span>
         <input type="range" min="1000000" max="100000000" step="1000000" value="10000000" id="r1-p" oninput="calcRecovery()">
-        <span class="ctrl-out g" id="o1-p">₩10,000,000</span>
+        <span class="ctrl-out g" id="o1-p">₩70,000,000</span>
       </div>
       <div class="ctrl">
         <span class="ctrl-label">손실률</span>
         <input type="range" class="red" min="1" max="80" step="1" value="20" id="r1-loss" oninput="calcRecovery()">
-        <span class="ctrl-out r" id="o1-loss">-20%</span>
+        <span class="ctrl-out r" id="o1-loss">-35%</span>
       </div>
     </div>
 
     <div class="section-label">손실률별 복구 필요 수익률</div>
-    <div class="chart-wrap"><canvas id="chart1"></canvas></div>
+    <div class="chart-wrap"><canvas id="chart1" style="box-sizing: border-box; display: block; height: 240px; width: 680px;" width="680" height="240"></canvas></div>
 
     <div class="section-label">주요 손절 타이밍 비교</div>
     <table class="recovery-table">
       <thead><tr><th>손실률</th><th>손실 후 잔액</th><th>필요 복구 수익률</th><th>연 7% 복구 기간</th></tr></thead>
-      <tbody id="rtbody"></tbody>
+      <tbody id="rtbody"><tr><td style="color:var(--red)">-5%</td><td>₩66,500,000</td><td style="color:var(--yellow)">+5.3%</td><td style="color:var(--blue)">0.8년</td></tr><tr><td style="color:var(--red)">-8%</td><td>₩64,400,000</td><td style="color:var(--yellow)">+8.7%</td><td style="color:var(--blue)">1.2년</td></tr><tr><td style="color:var(--red)">-10%</td><td>₩63,000,000</td><td style="color:var(--yellow)">+11.1%</td><td style="color:var(--blue)">1.6년</td></tr><tr><td style="color:var(--red)">-15%</td><td>₩59,500,000</td><td style="color:var(--yellow)">+17.6%</td><td style="color:var(--blue)">2.4년</td></tr><tr><td style="color:var(--red)">-20%</td><td>₩56,000,000</td><td style="color:var(--yellow)">+25.0%</td><td style="color:var(--blue)">3.3년</td></tr><tr><td style="color:var(--red)">-30%</td><td>₩49,000,000</td><td style="color:var(--yellow)">+42.9%</td><td style="color:var(--blue)">5.3년</td></tr><tr><td style="color:var(--red)">-40%</td><td>₩42,000,000</td><td style="color:var(--yellow)">+66.7%</td><td style="color:var(--blue)">7.6년</td></tr><tr><td style="color:var(--red)">-50%</td><td>₩35,000,000</td><td style="color:var(--yellow)">+100.0%</td><td style="color:var(--blue)">10.2년</td></tr><tr><td style="color:var(--red)">-60%</td><td>₩28,000,000</td><td style="color:var(--yellow)">+150.0%</td><td style="color:var(--blue)">13.5년</td></tr></tbody>
     </table>
 
-    <div class="insight green" id="insight-rec">손실률을 조정해 복구 수익률을 확인하세요.</div>
+    <div class="insight green" id="insight-rec"><b class="r">-35%</b> 손실 시 잔액은 <b class="r">₩45,500,000</b>입니다. 원금 회복에 <b class="y">+53.8%</b>의 수익이 필요하며, 연 7% 기준 <b class="g">6.4년</b>이 걸립니다. <b class="g">손절은 시간을 사는 것입니다.</b></div>
 
   </div>
 
   <!-- ══════════════════════════════
        패널 2: 손실 고통 시각화
   ══════════════════════════════ -->
-  <div class="panel" id="panel-2">
+  <div class="panel active" id="panel-2">
 
     <div class="hero">
       <div class="hero-tag green">논문 기반 심리 시각화</div>
@@ -375,7 +376,7 @@ input[type=range].orange::-webkit-slider-thumb{background:var(--lig);box-shadow:
       <div class="ctrl">
         <span class="ctrl-label">금액 설정</span>
         <input type="range" min="100000" max="10000000" step="100000" value="1000000" id="r2-amt" oninput="calcPain()">
-        <span class="ctrl-out g" id="o2-amt">₩1,000,000</span>
+        <span class="ctrl-out g" id="o2-amt">₩5,200,000</span>
       </div>
     </div>
 
@@ -387,13 +388,13 @@ input[type=range].orange::-webkit-slider-thumb{background:var(--lig);box-shadow:
 
     <div class="section-label">심리적 체감 강도 비교</div>
     <div class="pain-label">이득의 기쁨</div>
-    <div class="pain-bar-wrap"><div class="pain-bar-gain" id="bar-gain" style="width:44.4%"><span class="bar-text">기준 ×1.0</span></div></div>
+    <div class="pain-bar-wrap"><div class="pain-bar-gain" id="bar-gain" style="width: 44.4444%;"><span class="bar-text">기준 ×1.0</span></div></div>
     <div class="pain-label">손실의 고통 (× 2.25배)</div>
     <div class="pain-bar-wrap"><div class="pain-bar-loss" id="bar-loss" style="width:100%"><span class="bar-text">고통 ×2.25</span></div></div>
-    <div class="pain-stat"><span id="ps-gain">이득 ₩1,000,000 → 심리 점수 1.0</span><span id="ps-loss">손실 ₩1,000,000 → 심리 점수 2.25</span></div>
+    <div class="pain-stat"><span id="ps-gain">이득 ₩5,200,000 → 심리 점수 1.0</span><span id="ps-loss">손실 ₩5,200,000 → 심리 점수 2.25</span></div>
 
     <div class="section-label">프로스펙트 이론 — 가치 함수 곡선</div>
-    <div class="chart-wrap"><canvas id="chart2"></canvas></div>
+    <div class="chart-wrap"><canvas id="chart2" style="box-sizing: border-box; display: block; height: 240px; width: 680px;" width="680" height="240"></canvas></div>
 
     <div class="insight red">
       <b class="r">왜 손절이 어려울까요?</b><br>
@@ -458,8 +459,8 @@ function fmt(n){return '₩'+Math.round(n).toLocaleString('ko-KR');}
 function switchTab(idx){
   document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active',i===idx));
   document.querySelectorAll('.panel').forEach((p,i)=>p.classList.toggle('active',i===idx));
-  if(idx===1) setTimeout(calcRecovery,50);
-  if(idx===2) setTimeout(calcPain,50);
+  if(idx===1) setTimeout(calcRecovery,120);
+  if(idx===2) setTimeout(calcPain,120);
 }
 
 /* ═══════════════════════
@@ -604,6 +605,15 @@ function calcStop(){
 /* ═══════════════════════
    패널 1: 복구 계산
 ═══════════════════════ */
+function ensureChartCanvas(id){
+  const canvas = document.getElementById(id);
+  if(canvas){
+    const wrap = canvas.parentElement;
+    const h = wrap ? wrap.offsetHeight : 240;
+    canvas.style.height = (h || 220) + 'px';
+    canvas.style.width = '100%';
+  }
+}
 function calcRecovery(){
   const p    = +document.getElementById('r1-p').value;
   const loss = +document.getElementById('r1-loss').value;
@@ -695,6 +705,12 @@ function calcPain(){
 /* ═══════════════════════
    초기화
 ═══════════════════════ */
+window.addEventListener('resize', ()=>{
+  ['chart1','chart2'].forEach(id => {
+    const el = document.getElementById(id);
+    if(el) { el.style.height = ''; el.style.width = '100%'; }
+  });
+});
 window.addEventListener('load',()=>{
   loadPreset('lig');
 });
