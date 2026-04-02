@@ -1,11 +1,15 @@
 <!DOCTYPE html>
-<!-- saved from url=(0065)file:///C:/Users/blogh/Downloads/stoploss_calculator_nosense.html -->
-<html lang="ko"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>손절 심리 계산기 | 노센스</title>
-<link href="./index_files/css2" rel="stylesheet">
-<script src="./index_files/chart.umd.js.다운로드"></script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 
@@ -279,7 +283,6 @@ input[type=range]::-webkit-slider-thumb{
 <body>
 <div class="page">
 
-  <!-- 채널 헤더 -->
   <header class="header">
     <div class="brand">
       <div class="brand-logo">NS</div>
@@ -294,16 +297,12 @@ input[type=range]::-webkit-slider-thumb{
     </a>
   </header>
 
-  <!-- 탭 -->
   <div class="tabs">
     <button class="tab active" onclick="switchTab(0)">📉 손절가 계산기</button>
     <button class="tab" onclick="switchTab(1)">🔁 손실 복구 계산기</button>
     <button class="tab" onclick="switchTab(2)">🧠 손실 고통 시각화</button>
   </div>
 
-  <!-- ════════════════════════════════════
-       패널 1: 손절가 계산기
-  ════════════════════════════════════ -->
   <div class="panel active" id="panel-0">
 
     <div class="hero">
@@ -312,7 +311,6 @@ input[type=range]::-webkit-slider-thumb{
       <p class="hero-desc">매수 전 냉정한 상태에서 손절 가격을 미리 계산하세요. Shefrin &amp; Statman(1985)은 사전 규칙 설정이 처분 효과를 줄이는 가장 효과적인 방법이라 했습니다.</p>
     </div>
 
-    <!-- 지표 카드 -->
     <div class="cards">
       <div class="card">
         <div class="card-label">매수가</div>
@@ -328,7 +326,6 @@ input[type=range]::-webkit-slider-thumb{
       </div>
     </div>
 
-    <!-- 슬라이더 -->
     <div class="controls">
       <div class="ctrl">
         <span class="ctrl-label">매수 단가</span>
@@ -347,7 +344,6 @@ input[type=range]::-webkit-slider-thumb{
       </div>
     </div>
 
-    <!-- 결과 상세 -->
     <div class="result-box danger">
       <div class="result-row">
         <span class="result-key">총 매수금액</span>
@@ -369,13 +365,7 @@ input[type=range]::-webkit-slider-thumb{
 
     <div class="insight red" id="insight-stop">지금 <b class="r">-8.0%</b> 손절하면 <b class="y">₩400,000</b>의 손실로 끝납니다. 하지만 그냥 들고 버텨 <b class="r">-16%</b>가 되면 원금 복구에 <b class="r">+19.0%</b>가 필요합니다. 빠른 손절이 자본을 지킵니다.</div>
 
-  </div><!-- /panel-0 -->
-
-
-  <!-- ════════════════════════════════════
-       패널 2: 손실 복구 계산기
-  ════════════════════════════════════ -->
-  <div class="panel" id="panel-1">
+  </div><div class="panel" id="panel-1">
 
     <div class="hero">
       <div class="hero-tag">복구 수익률 계산기</div>
@@ -383,7 +373,6 @@ input[type=range]::-webkit-slider-thumb{
       <p class="hero-desc">손실이 클수록 복구에 필요한 수익률은 기하급수적으로 커집니다. 빠른 손절이 얼마나 유리한지 직접 확인하세요.</p>
     </div>
 
-    <!-- 지표 카드 -->
     <div class="cards">
       <div class="card">
         <div class="card-label">원금</div>
@@ -399,7 +388,6 @@ input[type=range]::-webkit-slider-thumb{
       </div>
     </div>
 
-    <!-- 슬라이더 -->
     <div class="controls">
       <div class="ctrl">
         <span class="ctrl-label">투자 원금</span>
@@ -413,13 +401,13 @@ input[type=range]::-webkit-slider-thumb{
       </div>
     </div>
 
-    <!-- 차트 -->
     <div class="chart-section">
       <div class="section-label">손실률별 복구 필요 수익률</div>
-      <div class="chart-wrap"><canvas id="chart2" width="660" height="260" style="display: block; box-sizing: border-box; height: 260px; width: 660px;"></canvas></div>
+      <div class="chart-wrap">
+        <canvas id="chart2"></canvas>
+      </div>
     </div>
 
-    <!-- 복구 테이블 -->
     <div class="section-label">주요 손절 타이밍 비교</div>
     <table class="recovery-table" id="rtable">
       <thead>
@@ -430,18 +418,12 @@ input[type=range]::-webkit-slider-thumb{
           <th>연 7% 기준 복구 기간</th>
         </tr>
       </thead>
-      <tbody id="rtbody"><tr><td class="loss-col">-5%</td><td>₩9,500,000</td><td class="need-col">+5.3%</td><td class="time-col">0.8년</td></tr><tr><td class="loss-col">-8%</td><td>₩9,200,000</td><td class="need-col">+8.7%</td><td class="time-col">1.2년</td></tr><tr><td class="loss-col">-10%</td><td>₩9,000,000</td><td class="need-col">+11.1%</td><td class="time-col">1.6년</td></tr><tr><td class="loss-col">-15%</td><td>₩8,500,000</td><td class="need-col">+17.6%</td><td class="time-col">2.4년</td></tr><tr class="current"><td class="loss-col">-20%</td><td>₩8,000,000</td><td class="need-col">+25.0%</td><td class="time-col">3.3년</td></tr><tr><td class="loss-col">-30%</td><td>₩7,000,000</td><td class="need-col">+42.9%</td><td class="time-col">5.3년</td></tr><tr><td class="loss-col">-40%</td><td>₩6,000,000</td><td class="need-col">+66.7%</td><td class="time-col">7.6년</td></tr><tr><td class="loss-col">-50%</td><td>₩5,000,000</td><td class="need-col">+100.0%</td><td class="time-col">10.2년</td></tr></tbody>
+      <tbody id="rtbody"></tbody>
     </table>
 
-    <div class="insight green" id="insight-recovery"><b class="r">-20%</b> 손실 시 잔액은 <b class="r">₩8,000,000</b>입니다. 원금을 회복하려면 <b class="y">+25.0%</b>의 수익이 필요하며, 연 7% 수익률 기준으로 <b class="g">3.3년</b>이 걸립니다. <b class="g">손절은 시간을 사는 것입니다.</b></div>
+    <div class="insight green" id="insight-recovery"></div>
 
-  </div><!-- /panel-1 -->
-
-
-  <!-- ════════════════════════════════════
-       패널 3: 손실 고통 시각화
-  ════════════════════════════════════ -->
-  <div class="panel" id="panel-2">
+  </div><div class="panel" id="panel-2">
 
     <div class="hero">
       <div class="hero-tag green">논문 기반 심리 시각화</div>
@@ -449,7 +431,6 @@ input[type=range]::-webkit-slider-thumb{
       <p class="hero-desc">카너먼 &amp; 트버스키(1979) 프로스펙트 이론. 손실의 심리적 고통은 같은 금액의 이득보다 평균 2.25배 강합니다.</p>
     </div>
 
-    <!-- 슬라이더 -->
     <div class="controls">
       <div class="ctrl">
         <span class="ctrl-label">금액 설정</span>
@@ -458,7 +439,6 @@ input[type=range]::-webkit-slider-thumb{
       </div>
     </div>
 
-    <!-- 지표 카드 -->
     <div class="cards" style="margin-bottom:1.25rem;">
       <div class="card highlight-g">
         <div class="card-label">이득의 기쁨</div>
@@ -474,7 +454,6 @@ input[type=range]::-webkit-slider-thumb{
       </div>
     </div>
 
-    <!-- 고통 바 시각화 -->
     <div class="pain-section">
       <div class="section-label">심리적 체감 강도 비교</div>
       <div class="pain-label">이득의 기쁨</div>
@@ -495,10 +474,11 @@ input[type=range]::-webkit-slider-thumb{
       </div>
     </div>
 
-    <!-- 차트: 가치 함수 곡선 -->
     <div class="chart-section">
       <div class="section-label">프로스펙트 이론 — 가치 함수 곡선</div>
-      <div class="chart-wrap"><canvas id="chart3" width="660" height="260" style="display: block; box-sizing: border-box; height: 260px; width: 660px;"></canvas></div>
+      <div class="chart-wrap">
+        <canvas id="chart3"></canvas>
+      </div>
     </div>
 
     <div class="insight red">
@@ -507,9 +487,7 @@ input[type=range]::-webkit-slider-thumb{
       <b class="y">출처: Kahneman &amp; Tversky (1979). Prospect Theory: An Analysis of Decision under Risk. Econometrica, 47(2), 263–291.</b>
     </div>
 
-  </div><!-- /panel-2 -->
-
-  <div class="footer">
+  </div><div class="footer">
     <b>노센스</b> · 경제·투자 인사이트 유튜브 채널 · 손절의 미학
   </div>
 </div>
@@ -758,6 +736,5 @@ window.addEventListener('load',()=>{
   calcStop();
 });
 </script>
-
-
-</body></html>
+</body>
+</html>
