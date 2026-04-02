@@ -1,166 +1,146 @@
 <!DOCTYPE html>
-<html lang="ko">
-<head>
-<meta charset="UTF-8">
+<!-- saved from url=(0062)file:///C:/Users/blogh/Downloads/stoploss_calculator_v2_4.html -->
+<html lang="ko"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>손절 심리 계산기 | 노센스</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<link href="./index_files/css2" rel="stylesheet">
+<script src="./index_files/chart.umd.js.다운로드"></script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-
 :root{
-  --bg:#0c0c10;
-  --s1:#141418;
-  --s2:#1c1c23;
-  --s3:#242430;
-  --border:rgba(255,255,255,0.07);
-  --border2:rgba(255,255,255,0.12);
-  --text:#eeeef0;
-  --muted:#666672;
-  --muted2:#999aaa;
-  --accent:#00e5a0;
-  --accent-dim:rgba(0,229,160,0.1);
-  --accent-border:rgba(0,229,160,0.25);
-  --red:#ff4d6a;
-  --red-dim:rgba(255,77,106,0.1);
-  --red-border:rgba(255,77,106,0.3);
-  --blue:#5b9cf6;
-  --blue-dim:rgba(91,156,246,0.1);
-  --yellow:#ffd166;
-  --yellow-dim:rgba(255,209,102,0.1);
+  --bg:#0c0c10;--s1:#141418;--s2:#1c1c23;--s3:#242430;
+  --border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.14);
+  --text:#eeeef0;--muted:#666672;--muted2:#999aaa;
+  --accent:#00e5a0;--accent-dim:rgba(0,229,160,0.1);--accent-border:rgba(0,229,160,0.25);
+  --red:#ff4d6a;--red-dim:rgba(255,77,106,0.1);--red-border:rgba(255,77,106,0.28);
+  --blue:#5b9cf6;--yellow:#ffd166;--yellow-dim:rgba(255,209,102,0.12);
+  --lig:#ff9500;--lig-dim:rgba(255,149,0,0.12);--lig-border:rgba(255,149,0,0.3);
+  --sam:#1428a0;--sam-light:#4f72ff;--sam-dim:rgba(79,114,255,0.12);--sam-border:rgba(79,114,255,0.3);
 }
+body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;padding:1.5rem 1.25rem 4rem;}
+.page{max-width:680px;margin:0 auto;}
 
-body{
-  font-family:'Noto Sans KR',sans-serif;
-  background:var(--bg);
-  color:var(--text);
-  min-height:100vh;
-  padding:2rem 1.25rem 4rem;
-}
-
-.page{max-width:660px;margin:0 auto;}
-
-/* ── 채널 헤더 ── */
-.header{
-  display:flex;align-items:center;justify-content:space-between;
-  margin-bottom:2.5rem;padding-bottom:1.25rem;
-  border-bottom:1px solid var(--border);
-}
+/* 헤더 */
+.header{display:flex;align-items:center;justify-content:space-between;margin-bottom:2rem;padding-bottom:1.25rem;border-bottom:1px solid var(--border);}
 .brand{display:flex;align-items:center;gap:12px;}
-.brand-logo{
-  width:42px;height:42px;border-radius:10px;
-  background:var(--accent);
-  display:flex;align-items:center;justify-content:center;
-  font-family:'Space Grotesk',sans-serif;
-  font-size:15px;font-weight:700;color:#0c0c10;
-  letter-spacing:-0.5px;flex-shrink:0;
-}
-.brand-name{font-size:16px;font-weight:700;letter-spacing:-0.3px;}
-.brand-sub{font-size:11px;color:var(--muted);margin-top:2px;}
-.yt-btn{
-  display:flex;align-items:center;gap:6px;
-  background:#ff0000;color:#fff;
-  font-size:11px;font-weight:700;
-  padding:6px 12px;border-radius:6px;
-  text-decoration:none;letter-spacing:0.3px;
-  white-space:nowrap;
-}
-.yt-btn svg{width:13px;height:13px;fill:#fff;}
+.brand-logo{width:40px;height:40px;border-radius:10px;background:var(--accent);display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:700;color:#0c0c10;flex-shrink:0;}
+.brand-name{font-size:15px;font-weight:700;letter-spacing:-0.3px;}
+.brand-sub{font-size:11px;color:var(--muted);margin-top:1px;}
+.yt-btn{display:flex;align-items:center;gap:5px;background:#ff0000;color:#fff;font-size:11px;font-weight:700;padding:6px 11px;border-radius:6px;text-decoration:none;white-space:nowrap;}
+.yt-btn svg{width:12px;height:12px;fill:#fff;}
 
-/* ── 탭 ── */
-.tabs{
-  display:flex;gap:6px;margin-bottom:1.75rem;
-  background:var(--s1);border:1px solid var(--border);
-  border-radius:12px;padding:5px;
+/* 오늘의 핫 종목 배너 */
+.hot-banner{
+  background:linear-gradient(135deg,rgba(255,77,106,0.15) 0%,rgba(255,149,0,0.08) 100%);
+  border:1px solid var(--red-border);border-radius:14px;
+  padding:12px 16px;margin-bottom:1.5rem;
+  display:flex;align-items:center;gap:10px;
 }
-.tab{
-  flex:1;padding:9px 8px;border-radius:8px;
-  font-size:12px;font-weight:700;text-align:center;
-  cursor:pointer;color:var(--muted);
-  transition:all 0.2s;border:none;background:transparent;
-  font-family:'Noto Sans KR',sans-serif;
-  letter-spacing:-0.2px;
+.hot-badge{
+  background:var(--red);color:#fff;font-size:10px;font-weight:700;
+  padding:3px 8px;border-radius:4px;letter-spacing:1px;white-space:nowrap;
 }
+.hot-text{font-size:12px;color:var(--muted2);line-height:1.5;}
+.hot-text b{color:var(--text);}
+
+/* 종목 프리셋 버튼 */
+.preset-section{margin-bottom:1.5rem;}
+.preset-label{font-size:11px;font-weight:700;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:10px;}
+.presets{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;}
+.preset-btn{
+  border-radius:12px;padding:12px 10px;cursor:pointer;
+  border:1px solid var(--border2);background:var(--s1);
+  text-align:left;transition:all 0.2s;position:relative;overflow:hidden;
+}
+.preset-btn::before{content:'';position:absolute;inset:0;opacity:0;transition:opacity 0.2s;}
+.preset-btn:hover{transform:translateY(-1px);box-shadow:0 4px 20px rgba(0,0,0,0.3);}
+.preset-btn.lig{border-color:var(--lig-border);}
+.preset-btn.lig::before{background:var(--lig-dim);}
+.preset-btn.lig:hover::before{opacity:1;}
+.preset-btn.sam{border-color:var(--sam-border);}
+.preset-btn.sam::before{background:var(--sam-dim);}
+.preset-btn.sam:hover::before{opacity:1;}
+.preset-btn.custom{border-color:var(--border2);}
+.preset-btn.active{border-width:2px;}
+.preset-btn.lig.active{border-color:var(--lig);}
+.preset-btn.sam.active{border-color:var(--sam-light);}
+.preset-btn.custom.active{border-color:var(--accent);}
+.p-ticker{font-size:10px;font-weight:700;letter-spacing:1px;margin-bottom:4px;}
+.p-ticker.lig-c{color:var(--lig);}
+.p-ticker.sam-c{color:var(--sam-light);}
+.p-ticker.cus-c{color:var(--accent);}
+.p-name{font-size:12px;font-weight:700;color:var(--text);margin-bottom:3px;line-height:1.3;}
+.p-price{font-size:11px;font-family:'Space Grotesk',sans-serif;}
+.p-change{font-size:10px;font-weight:700;margin-top:2px;}
+.up{color:var(--red);}
+.dn{color:var(--blue);}
+
+/* 탭 */
+.tabs{display:flex;gap:6px;margin-bottom:1.75rem;background:var(--s1);border:1px solid var(--border);border-radius:12px;padding:5px;}
+.tab{flex:1;padding:9px 6px;border-radius:8px;font-size:12px;font-weight:700;text-align:center;cursor:pointer;color:var(--muted);transition:all 0.2s;border:none;background:transparent;font-family:'Noto Sans KR',sans-serif;letter-spacing:-0.2px;}
 .tab.active{background:var(--s3);color:var(--text);border:1px solid var(--border2);}
 
-/* ── 히어로 ── */
-.hero{margin-bottom:1.75rem;}
-.hero-tag{
-  display:inline-block;
-  font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
-  color:var(--red);background:var(--red-dim);border:1px solid var(--red-border);
-  border-radius:4px;padding:3px 8px;margin-bottom:10px;
-}
-.hero-tag.green{color:var(--accent);background:var(--accent-dim);border-color:var(--accent-border);}
-.hero-title{font-size:28px;font-weight:900;line-height:1.15;letter-spacing:-0.5px;}
-.hero-title em{color:var(--red);font-style:normal;}
+/* 히어로 */
+.hero{margin-bottom:1.5rem;}
+.hero-tag{display:inline-block;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;border-radius:4px;padding:3px 8px;margin-bottom:9px;}
+.hero-tag.red{color:var(--red);background:var(--red-dim);border:1px solid var(--red-border);}
+.hero-tag.green{color:var(--accent);background:var(--accent-dim);border:1px solid var(--accent-border);}
+.hero-tag.orange{color:var(--lig);background:var(--lig-dim);border:1px solid var(--lig-border);}
+.hero-title{font-size:26px;font-weight:900;line-height:1.2;letter-spacing:-0.5px;}
+.hero-title em{font-style:normal;}
+.hero-title em.r{color:var(--red);}
 .hero-title em.g{color:var(--accent);}
+.hero-title em.o{color:var(--lig);}
 .hero-desc{font-size:13px;color:var(--muted2);margin-top:8px;line-height:1.7;}
 
-/* ── 지표 카드 ── */
-.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:1.5rem;}
-.card{
-  background:var(--s1);border:1px solid var(--border);
-  border-radius:12px;padding:14px;
-  transition:border-color 0.3s;
-}
-.card.highlight{border-color:var(--red-border);background:var(--red-dim);}
-.card.highlight-g{border-color:var(--accent-border);background:var(--accent-dim);}
-.card-label{font-size:11px;color:var(--muted);margin-bottom:6px;letter-spacing:0.3px;}
-.card-value{font-size:17px;font-weight:700;line-height:1;}
+/* 지표 카드 */
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:1.25rem;}
+.card{background:var(--s1);border:1px solid var(--border);border-radius:12px;padding:13px;}
+.card.hl-r{border-color:var(--red-border);background:var(--red-dim);animation:pulse-r 2.5s infinite;}
+.card.hl-g{border-color:var(--accent-border);background:var(--accent-dim);}
+.card.hl-o{border-color:var(--lig-border);background:var(--lig-dim);}
+@keyframes pulse-r{0%,100%{box-shadow:0 0 0 0 rgba(255,77,106,0)}50%{box-shadow:0 0 0 5px rgba(255,77,106,0.12)}}
+.card-label{font-size:11px;color:var(--muted);margin-bottom:5px;}
+.card-value{font-size:16px;font-weight:700;line-height:1;font-family:'Space Grotesk',sans-serif;}
 .card-value.r{color:var(--red);}
 .card-value.g{color:var(--accent);}
 .card-value.b{color:var(--blue);}
 .card-value.y{color:var(--yellow);}
+.card-value.o{color:var(--lig);}
 
-/* ── 슬라이더 컨트롤 ── */
-.controls{display:flex;flex-direction:column;gap:8px;margin-bottom:1.5rem;}
-.ctrl{
-  background:var(--s1);border:1px solid var(--border);
-  border-radius:12px;padding:12px 16px;
-  display:flex;align-items:center;gap:12px;
-}
-.ctrl-label{font-size:12px;color:var(--muted);min-width:80px;line-height:1.4;}
-.ctrl-out{
-  font-size:13px;font-weight:700;min-width:90px;
-  text-align:right;
-  font-family:'Space Grotesk',sans-serif;
-}
+/* 컨트롤 */
+.controls{display:flex;flex-direction:column;gap:8px;margin-bottom:1.25rem;}
+.ctrl{background:var(--s1);border:1px solid var(--border);border-radius:12px;padding:11px 15px;display:flex;align-items:center;gap:12px;}
+.ctrl-label{font-size:12px;color:var(--muted);min-width:78px;line-height:1.4;}
+.ctrl-out{font-size:13px;font-weight:700;min-width:92px;text-align:right;font-family:'Space Grotesk',sans-serif;}
 .ctrl-out.r{color:var(--red);}
 .ctrl-out.g{color:var(--accent);}
-input[type=range]{
-  flex:1;-webkit-appearance:none;appearance:none;
-  height:3px;border-radius:3px;
-  background:var(--s3);cursor:pointer;outline:none;
-}
+.ctrl-out.o{color:var(--lig);}
+input[type=range]{flex:1;-webkit-appearance:none;height:3px;border-radius:3px;background:var(--s3);cursor:pointer;outline:none;}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;border-radius:50%;background:var(--accent);cursor:pointer;border:2px solid var(--bg);box-shadow:0 0 0 3px var(--accent-dim);}
 input[type=range].red::-webkit-slider-thumb{background:var(--red);box-shadow:0 0 0 3px var(--red-dim);}
-input[type=range]::-webkit-slider-thumb{
-  -webkit-appearance:none;width:16px;height:16px;
-  border-radius:50%;background:var(--accent);cursor:pointer;
-  border:2px solid var(--bg);
-  box-shadow:0 0 0 3px var(--accent-dim);
-}
+input[type=range].orange::-webkit-slider-thumb{background:var(--lig);box-shadow:0 0 0 3px var(--lig-dim);}
 
-/* ── 차트 ── */
-.chart-section{margin-bottom:1.5rem;}
-.section-label{
-  font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
-  color:var(--muted);margin-bottom:10px;
+/* 수동 입력 */
+.manual-row{display:flex;gap:8px;margin-bottom:8px;}
+.manual-input{
+  flex:1;background:var(--s2);border:1px solid var(--border2);
+  border-radius:10px;padding:10px 14px;
+  font-size:13px;font-weight:700;color:var(--text);
+  font-family:'Space Grotesk',sans-serif;outline:none;
+  transition:border-color 0.2s;
 }
-.chart-wrap{position:relative;width:100%;height:260px;}
+.manual-input:focus{border-color:var(--accent);}
+.manual-input::placeholder{color:var(--muted);font-weight:400;}
+.manual-label{font-size:11px;color:var(--muted);margin-bottom:5px;}
 
-/* ── 손절가 결과 박스 ── */
-.result-box{
-  background:var(--s1);border:1px solid var(--border);
-  border-radius:14px;padding:1.25rem;margin-bottom:1.25rem;
-}
-.result-box.danger{border-color:var(--red-border);background:rgba(255,77,106,0.05);}
-.result-box.safe{border-color:var(--accent-border);background:rgba(0,229,160,0.05);}
-.result-row{
-  display:flex;justify-content:space-between;align-items:center;
-  padding:10px 0;border-bottom:1px solid var(--border);
-}
+/* 결과 박스 */
+.result-box{background:var(--s1);border:1px solid var(--border);border-radius:14px;padding:1.1rem;margin-bottom:1.1rem;}
+.result-box.danger{border-color:var(--red-border);background:rgba(255,77,106,0.04);}
+.result-box.safe{border-color:var(--accent-border);background:rgba(0,229,160,0.04);}
+.result-box.orange{border-color:var(--lig-border);background:rgba(255,149,0,0.04);}
+.result-row{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid var(--border);}
 .result-row:last-child{border-bottom:none;padding-bottom:0;}
 .result-row:first-child{padding-top:0;}
 .result-key{font-size:12px;color:var(--muted2);}
@@ -168,118 +148,60 @@ input[type=range]::-webkit-slider-thumb{
 .result-val.r{color:var(--red);}
 .result-val.g{color:var(--accent);}
 .result-val.y{color:var(--yellow);}
+.result-val.o{color:var(--lig);}
 
-/* ── 심리 고통 바 ── */
-.pain-section{margin-bottom:1.5rem;}
-.pain-label{font-size:12px;color:var(--muted2);margin-bottom:8px;}
-.pain-bar-wrap{
-  background:var(--s2);border-radius:8px;height:36px;
-  position:relative;overflow:hidden;border:1px solid var(--border);
-  margin-bottom:6px;
-}
-.pain-bar-gain{
-  position:absolute;left:0;top:0;height:100%;
-  background:linear-gradient(90deg,rgba(0,229,160,0.8),rgba(0,229,160,0.4));
-  border-radius:8px 0 0 8px;
-  display:flex;align-items:center;justify-content:flex-end;
-  padding-right:10px;
-  transition:width 0.4s cubic-bezier(0.4,0,0.2,1);
-}
-.pain-bar-loss{
-  position:absolute;right:0;top:0;height:100%;
-  background:linear-gradient(90deg,rgba(255,77,106,0.4),rgba(255,77,106,0.9));
-  border-radius:0 8px 8px 0;
-  display:flex;align-items:center;
-  padding-left:10px;
-  transition:width 0.4s cubic-bezier(0.4,0,0.2,1);
-}
-.bar-text{font-size:11px;font-weight:700;color:#fff;}
-.pain-stat{
-  display:flex;justify-content:space-between;
-  font-size:11px;color:var(--muted);
-}
+/* 차트 */
+.chart-wrap{position:relative;width:100%;height:240px;margin-bottom:1.25rem;}
+.section-label{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:10px;}
 
-/* ── 복구 테이블 ── */
-.recovery-table{
-  width:100%;border-collapse:collapse;margin-bottom:1.5rem;
-  background:var(--s1);border-radius:12px;overflow:hidden;
-  border:1px solid var(--border);
-}
-.recovery-table th{
-  font-size:11px;font-weight:700;color:var(--muted);
-  padding:10px 14px;text-align:left;letter-spacing:0.5px;
-  background:var(--s2);border-bottom:1px solid var(--border);
-}
-.recovery-table td{
-  font-size:13px;padding:10px 14px;
-  border-bottom:1px solid var(--border);
-  font-family:'Space Grotesk',sans-serif;
-  font-weight:500;
-}
+/* 복구 테이블 */
+.recovery-table{width:100%;border-collapse:collapse;margin-bottom:1.25rem;background:var(--s1);border-radius:12px;overflow:hidden;border:1px solid var(--border);}
+.recovery-table th{font-size:11px;font-weight:700;color:var(--muted);padding:9px 13px;text-align:left;background:var(--s2);border-bottom:1px solid var(--border);}
+.recovery-table td{font-size:12px;padding:9px 13px;border-bottom:1px solid var(--border);font-family:'Space Grotesk',sans-serif;font-weight:500;}
 .recovery-table tr:last-child td{border-bottom:none;}
 .recovery-table tr.current{background:rgba(255,77,106,0.08);}
 .recovery-table tr.current td{color:var(--red);}
-.loss-col{color:var(--red);}
-.need-col{color:var(--yellow);}
-.time-col{color:var(--blue);}
 
-/* ── 인사이트 ── */
-.insight{
-  border-radius:12px;padding:14px 16px;
-  font-size:13px;line-height:1.7;
-  margin-bottom:1.5rem;
-}
-.insight.red{
-  background:var(--red-dim);border:1px solid var(--red-border);
-  color:rgba(255,200,200,0.85);
-}
-.insight.green{
-  background:var(--accent-dim);border:1px solid var(--accent-border);
-  color:rgba(200,255,235,0.85);
-}
+/* 인사이트 */
+.insight{border-radius:12px;padding:13px 15px;font-size:12.5px;line-height:1.75;margin-bottom:1.25rem;}
+.insight.red{background:var(--red-dim);border:1px solid var(--red-border);color:rgba(255,200,200,0.85);}
+.insight.green{background:var(--accent-dim);border:1px solid var(--accent-border);color:rgba(200,255,235,0.85);}
+.insight.orange{background:var(--lig-dim);border:1px solid var(--lig-border);color:rgba(255,220,170,0.9);}
 .insight b.r{color:var(--red);}
 .insight b.g{color:var(--accent);}
 .insight b.y{color:var(--yellow);}
+.insight b.o{color:var(--lig);}
 
-/* ── 패널 ── */
+/* pain bar */
+.pain-bar-wrap{background:var(--s2);border-radius:8px;height:34px;position:relative;overflow:hidden;border:1px solid var(--border);margin-bottom:6px;}
+.pain-bar-gain{position:absolute;left:0;top:0;height:100%;background:linear-gradient(90deg,rgba(0,229,160,0.8),rgba(0,229,160,0.4));border-radius:8px 0 0 8px;display:flex;align-items:center;justify-content:flex-end;padding-right:10px;transition:width 0.4s cubic-bezier(0.4,0,0.2,1);}
+.pain-bar-loss{position:absolute;right:0;top:0;height:100%;background:linear-gradient(90deg,rgba(255,77,106,0.4),rgba(255,77,106,0.9));border-radius:0 8px 8px 0;display:flex;align-items:center;padding-left:10px;transition:width 0.4s cubic-bezier(0.4,0,0.2,1);}
+.bar-text{font-size:11px;font-weight:700;color:#fff;}
+.pain-stat{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-bottom:1.25rem;}
+.pain-label{font-size:12px;color:var(--muted2);margin-bottom:7px;}
+
+/* 패널 */
 .panel{display:none;}
-.panel.active{display:block;}
+.panel.active{display:block;animation:fadeIn 0.22s ease;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
 
-/* ── 섹션 구분선 ── */
-.divider{
-  height:1px;background:var(--border);
-  margin:1.25rem 0;
-}
-
-/* ── 푸터 ── */
-.footer{
-  text-align:center;margin-top:2.5rem;padding-top:1.5rem;
-  border-top:1px solid var(--border);
-  font-size:11px;color:var(--muted);
-}
+/* 풋터 */
+.footer{text-align:center;margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--border);font-size:11px;color:var(--muted);}
 .footer b{color:var(--accent);}
-
-/* ── 애니메이션 ── */
-@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-.panel.active{animation:fadeIn 0.25s ease;}
-
-@keyframes pulse-red{
-  0%,100%{box-shadow:0 0 0 0 rgba(255,77,106,0);}
-  50%{box-shadow:0 0 0 6px rgba(255,77,106,0.15);}
-}
-.card.highlight{animation:pulse-red 2s infinite;}
 
 @media(max-width:480px){
   .cards{grid-template-columns:1fr 1fr;}
   .cards .card:last-child{grid-column:span 2;}
   .hero-title{font-size:22px;}
+  .presets{grid-template-columns:1fr 1fr;}
+  .presets .preset-btn:last-child{grid-column:span 2;}
 }
 </style>
 </head>
 <body>
 <div class="page">
 
-  <!-- 채널 헤더 -->
+  <!-- 헤더 -->
   <header class="header">
     <div class="brand">
       <div class="brand-logo">NS</div>
@@ -289,10 +211,48 @@ input[type=range]::-webkit-slider-thumb{
       </div>
     </div>
     <a class="yt-btn" href="https://www.youtube.com/@KnowSense_KR" target="_blank">
-      <svg viewBox="0 0 24 24"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="#0c0c10"/></svg>
+      <svg viewBox="0 0 24 24"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8z"></path><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="#0c0c10"></polygon></svg>
       구독하기
     </a>
   </header>
+
+  <!-- 오늘의 핫 배너 -->
+  <div class="hot-banner">
+    <span class="hot-badge">🔥 TODAY</span>
+    <div class="hot-text">
+      <b>LIG넥스원 +29.95%</b> · <b>삼성전자 +13.40%</b> — 고점에서 샀다면 지금 손절가가 얼마인지 확인하세요
+    </div>
+  </div>
+
+  <!-- 종목 프리셋 -->
+  <div class="preset-section">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+      <div class="preset-label" style="margin-bottom:0">종목 빠른 선택</div>
+      <div style="font-size:10px;color:var(--muted);background:var(--s2);border:1px solid var(--border);border-radius:4px;padding:3px 8px;letter-spacing:0.2px;">⚠ 표시 가격은 예시입니다</div>
+    </div>
+    <div class="presets">
+      <button class="preset-btn lig active" onclick="loadPreset(&#39;lig&#39;)">
+        <div class="p-ticker lig-c">079550</div>
+        <div class="p-name">LIG넥스원</div>
+        <div class="p-price" style="color:var(--muted2)">794,000원</div>
+        <div class="p-change up">▲ +29.95%</div>
+        <div style="font-size:9px;color:var(--muted);margin-top:4px;letter-spacing:0.2px;">예시 가격 (2026.04.01)</div>
+      </button>
+      <button class="preset-btn sam" onclick="loadPreset(&#39;sam&#39;)">
+        <div class="p-ticker sam-c">005930</div>
+        <div class="p-name">삼성전자</div>
+        <div class="p-price" style="color:var(--muted2)">189,600원</div>
+        <div class="p-change up">▲ +13.40%</div>
+        <div style="font-size:9px;color:var(--muted);margin-top:4px;letter-spacing:0.2px;">예시 가격 (2026.04.01 KRX 종가)</div>
+      </button>
+      <button class="preset-btn custom" onclick="loadPreset(&#39;custom&#39;)">
+        <div class="p-ticker cus-c">CUSTOM</div>
+        <div class="p-name">직접 입력</div>
+        <div class="p-price" style="color:var(--muted2)">내 종목</div>
+        <div class="p-change" style="color:var(--muted)">슬라이더 조작</div>
+      </button>
+    </div>
+  </div>
 
   <!-- 탭 -->
   <div class="tabs">
@@ -301,466 +261,444 @@ input[type=range]::-webkit-slider-thumb{
     <button class="tab" onclick="switchTab(2)">🧠 손실 고통 시각화</button>
   </div>
 
-  <!-- ════════════════════════════════════
-       패널 1: 손절가 계산기
-  ════════════════════════════════════ -->
+  <!-- ══════════════════════════════
+       패널 0: 손절가 계산기
+  ══════════════════════════════ -->
   <div class="panel active" id="panel-0">
 
     <div class="hero">
-      <div class="hero-tag">손절 라인 설정기</div>
-      <h1 class="hero-title">지금 매수하기 전<br><em>손절가를 먼저</em> 정해라</h1>
-      <p class="hero-desc">매수 전 냉정한 상태에서 손절 가격을 미리 계산하세요. Shefrin & Statman(1985)은 사전 규칙 설정이 처분 효과를 줄이는 가장 효과적인 방법이라 했습니다.</p>
+      <div class="hero-tag orange" id="p0-tag">오늘 상한가 종목 적용</div>
+      <h1 class="hero-title" id="p0-title">오늘 <em class="o">LIG넥스원</em> 고점에서 샀다면<br>손절가는 <em class="r">얼마</em>일까</h1>
+      <p class="hero-desc" id="p0-desc">2026년 4월 1일 LIG넥스원 +29.95% 급등. Shefrin &amp; Statman(1985) — 고점 매수 후 손절가를 반드시 미리 설정해야 처분 효과를 막을 수 있습니다.</p>
     </div>
 
-    <!-- 지표 카드 -->
     <div class="cards">
-      <div class="card">
-        <div class="card-label">매수가</div>
-        <div class="card-value" id="c1-buy">₩0</div>
-      </div>
-      <div class="card highlight" id="c1-stop-card">
-        <div class="card-label">⚠ 손절가</div>
-        <div class="card-value r" id="c1-stop">₩0</div>
-      </div>
-      <div class="card">
-        <div class="card-label">예상 손실금액</div>
-        <div class="card-value r" id="c1-loss">₩0</div>
+      <div class="card"><div class="card-label">매수가</div><div class="card-value o" id="c0-buy">₩794,000</div></div>
+      <div class="card hl-r"><div class="card-label">⚠ 손절가</div><div class="card-value r" id="c0-stop">₩730,480</div></div>
+      <div class="card"><div class="card-label">예상 손실금액</div><div class="card-value r" id="c0-loss">-₩635,200</div></div>
+    </div>
+
+    <!-- 직접 입력 영역 (custom 모드) -->
+    <div id="custom-area" style="display:none;margin-bottom:1rem;">
+      <div class="manual-label">매수 단가 직접 입력 (원)</div>
+      <div class="manual-row">
+        <input type="number" class="manual-input" id="manual-buy" placeholder="예: 50000" oninput="onManualBuy()">
+        <input type="number" class="manual-input" id="manual-qty" placeholder="수량 (주)" oninput="syncQtyFromInput()" min="1" max="1000">
       </div>
     </div>
 
-    <!-- 슬라이더 -->
     <div class="controls">
-      <div class="ctrl">
+      <div class="ctrl" id="buy-ctrl" style="display: flex;">
         <span class="ctrl-label">매수 단가</span>
-        <input type="range" min="1000" max="500000" step="1000" value="50000" id="r1-buy" oninput="calcStop()">
-        <span class="ctrl-out g" id="o1-buy">₩50,000</span>
+        <input type="range" class="orange" min="1000" max="1200000" step="1000" value="794000" id="r0-buy" oninput="calcStop()">
+        <span class="ctrl-out o" id="o0-buy">₩794,000</span>
       </div>
       <div class="ctrl">
         <span class="ctrl-label">보유 수량</span>
-        <input type="range" min="1" max="1000" step="1" value="100" id="r1-qty" oninput="calcStop()">
-        <span class="ctrl-out g" id="o1-qty">100주</span>
+        <input type="range" min="1" max="1000" step="1" value="10" id="r0-qty" oninput="syncQtyFromSlider()">
+        <span class="ctrl-out g" id="o0-qty">10주</span>
       </div>
       <div class="ctrl">
         <span class="ctrl-label">손절 기준</span>
-        <input type="range" class="red" min="1" max="30" step="0.5" value="8" id="r1-pct" oninput="calcStop()">
-        <span class="ctrl-out r" id="o1-pct">-8.0%</span>
+        <input type="range" class="red" min="1" max="50" step="0.5" value="8" id="r0-pct" oninput="calcStop()">
+        <span class="ctrl-out r" id="o0-pct">-8.0%</span>
       </div>
     </div>
 
-    <!-- 결과 상세 -->
-    <div class="result-box danger">
-      <div class="result-row">
-        <span class="result-key">총 매수금액</span>
-        <span class="result-val g" id="r1-total">₩5,000,000</span>
-      </div>
-      <div class="result-row">
-        <span class="result-key">손절가 (1주당)</span>
-        <span class="result-val r" id="r1-stopprice">₩46,000</span>
-      </div>
-      <div class="result-row">
-        <span class="result-key">손절 시 손실금액</span>
-        <span class="result-val r" id="r1-lossamount">-₩400,000</span>
-      </div>
-      <div class="result-row">
-        <span class="result-key">손절 후 남는 금액</span>
-        <span class="result-val y" id="r1-remain">₩4,600,000</span>
-      </div>
+    <div class="result-box orange">
+      <div class="result-row"><span class="result-key">종목명</span><span class="result-val o" id="r0-name">LIG넥스원</span></div>
+      <div class="result-row"><span class="result-key">총 매수금액</span><span class="result-val g" id="r0-total">₩7,940,000</span></div>
+      <div class="result-row"><span class="result-key">손절가 (1주당)</span><span class="result-val r" id="r0-stopprice">₩730,480</span></div>
+      <div class="result-row"><span class="result-key">손절 시 손실금액</span><span class="result-val r" id="r0-lossamount">-₩635,200</span></div>
+      <div class="result-row"><span class="result-key">손절 후 남는 자금</span><span class="result-val y" id="r0-remain">₩7,304,800</span></div>
     </div>
 
-    <div class="insight red" id="insight-stop">
-      슬라이더를 움직여 손절 가격을 확인하세요.
-    </div>
+    <div class="insight orange" id="insight-stop"><b>LIG넥스원</b> ₩794,000 매수 시 <b class="r">-8.0%</b> 손절가는 <b class="r">₩730,480</b>입니다. 손실금액 <b class="r">₩635,200</b>로 끝낼 수 있어요. 만약 손절 못 하고 <b class="r">-16%</b>까지 버티면 원금 회복에 <b class="r">+19.0%</b>가 필요합니다.</div>
 
-  </div><!-- /panel-0 -->
+  </div>
 
-
-  <!-- ════════════════════════════════════
-       패널 2: 손실 복구 계산기
-  ════════════════════════════════════ -->
+  <!-- ══════════════════════════════
+       패널 1: 손실 복구 계산기
+  ══════════════════════════════ -->
   <div class="panel" id="panel-1">
 
     <div class="hero">
-      <div class="hero-tag">복구 수익률 계산기</div>
-      <h1 class="hero-title">-50% 손실은<br><em>+100%가</em> 있어야 복구된다</h1>
+      <div class="hero-tag red">손실 복구 계산기</div>
+      <h1 class="hero-title">-50% 손실은<br><em class="r">+100%</em>가 있어야 복구된다</h1>
       <p class="hero-desc">손실이 클수록 복구에 필요한 수익률은 기하급수적으로 커집니다. 빠른 손절이 얼마나 유리한지 직접 확인하세요.</p>
     </div>
 
-    <!-- 지표 카드 -->
     <div class="cards">
-      <div class="card">
-        <div class="card-label">원금</div>
-        <div class="card-value g" id="c2-principal">₩10,000,000</div>
-      </div>
-      <div class="card highlight">
-        <div class="card-label">손실 후 잔액</div>
-        <div class="card-value r" id="c2-after">₩8,000,000</div>
-      </div>
-      <div class="card">
-        <div class="card-label">필요 복구 수익률</div>
-        <div class="card-value y" id="c2-need">+25.0%</div>
-      </div>
+      <div class="card"><div class="card-label">원금</div><div class="card-value g" id="c1-p">₩10,000,000</div></div>
+      <div class="card hl-r"><div class="card-label">손실 후 잔액</div><div class="card-value r" id="c1-after">₩8,000,000</div></div>
+      <div class="card"><div class="card-label">필요 복구 수익률</div><div class="card-value y" id="c1-need">+25.0%</div></div>
     </div>
 
-    <!-- 슬라이더 -->
     <div class="controls">
       <div class="ctrl">
         <span class="ctrl-label">투자 원금</span>
-        <input type="range" min="1000000" max="100000000" step="1000000" value="10000000" id="r2-p" oninput="calcRecovery()">
-        <span class="ctrl-out g" id="o2-p">₩10,000,000</span>
+        <input type="range" min="1000000" max="100000000" step="1000000" value="10000000" id="r1-p" oninput="calcRecovery()">
+        <span class="ctrl-out g" id="o1-p">₩10,000,000</span>
       </div>
       <div class="ctrl">
         <span class="ctrl-label">손실률</span>
-        <input type="range" class="red" min="1" max="80" step="1" value="20" id="r2-loss" oninput="calcRecovery()">
-        <span class="ctrl-out r" id="o2-loss">-20%</span>
+        <input type="range" class="red" min="1" max="80" step="1" value="20" id="r1-loss" oninput="calcRecovery()">
+        <span class="ctrl-out r" id="o1-loss">-20%</span>
       </div>
     </div>
 
-    <!-- 차트 -->
-    <div class="chart-section">
-      <div class="section-label">손실률별 복구 필요 수익률</div>
-      <div class="chart-wrap"><canvas id="chart2"></canvas></div>
-    </div>
+    <div class="section-label">손실률별 복구 필요 수익률</div>
+    <div class="chart-wrap"><canvas id="chart1"></canvas></div>
 
-    <!-- 복구 테이블 -->
     <div class="section-label">주요 손절 타이밍 비교</div>
-    <table class="recovery-table" id="rtable">
-      <thead>
-        <tr>
-          <th>손실률</th>
-          <th>손실 후 잔액</th>
-          <th>필요 복구 수익률</th>
-          <th>연 7% 기준 복구 기간</th>
-        </tr>
-      </thead>
+    <table class="recovery-table">
+      <thead><tr><th>손실률</th><th>손실 후 잔액</th><th>필요 복구 수익률</th><th>연 7% 복구 기간</th></tr></thead>
       <tbody id="rtbody"></tbody>
     </table>
 
-    <div class="insight green" id="insight-recovery">
-      손실률을 조정해서 복구 수익률을 확인하세요.
-    </div>
+    <div class="insight green" id="insight-rec">손실률을 조정해 복구 수익률을 확인하세요.</div>
 
-  </div><!-- /panel-1 -->
+  </div>
 
-
-  <!-- ════════════════════════════════════
-       패널 3: 손실 고통 시각화
-  ════════════════════════════════════ -->
+  <!-- ══════════════════════════════
+       패널 2: 손실 고통 시각화
+  ══════════════════════════════ -->
   <div class="panel" id="panel-2">
 
     <div class="hero">
       <div class="hero-tag green">논문 기반 심리 시각화</div>
-      <h1 class="hero-title">같은 금액인데<br><em class="g">이득의 기쁨</em>보다 <em>손실의 고통</em>이 크다</h1>
-      <p class="hero-desc">카너먼 & 트버스키(1979) 프로스펙트 이론. 손실의 심리적 고통은 같은 금액의 이득보다 평균 2.25배 강합니다.</p>
+      <h1 class="hero-title">같은 금액인데<br><em class="g">이득의 기쁨</em>보다 <em class="r">손실의 고통</em>이 크다</h1>
+      <p class="hero-desc">카너먼 &amp; 트버스키(1979) 프로스펙트 이론 — 손실의 고통은 같은 금액의 이득보다 평균 2.25배 강합니다.</p>
     </div>
 
-    <!-- 슬라이더 -->
     <div class="controls">
       <div class="ctrl">
         <span class="ctrl-label">금액 설정</span>
-        <input type="range" min="100000" max="10000000" step="100000" value="1000000" id="r3-amt" oninput="calcPain()">
-        <span class="ctrl-out g" id="o3-amt">₩1,000,000</span>
+        <input type="range" min="100000" max="10000000" step="100000" value="1000000" id="r2-amt" oninput="calcPain()">
+        <span class="ctrl-out g" id="o2-amt">₩1,000,000</span>
       </div>
     </div>
 
-    <!-- 지표 카드 -->
-    <div class="cards" style="margin-bottom:1.25rem;">
-      <div class="card highlight-g">
-        <div class="card-label">이득의 기쁨</div>
-        <div class="card-value g" id="c3-gain">기준 1.0</div>
-      </div>
-      <div class="card highlight">
-        <div class="card-label">손실의 고통</div>
-        <div class="card-value r" id="c3-loss">× 2.25</div>
-      </div>
-      <div class="card">
-        <div class="card-label">고통 초과분</div>
-        <div class="card-value r" id="c3-extra">+125%</div>
-      </div>
+    <div class="cards">
+      <div class="card hl-g"><div class="card-label">이득의 기쁨</div><div class="card-value g">심리 점수 1.0</div></div>
+      <div class="card hl-r"><div class="card-label">손실의 고통</div><div class="card-value r">심리 점수 2.25</div></div>
+      <div class="card"><div class="card-label">고통 초과분</div><div class="card-value r">+125%</div></div>
     </div>
 
-    <!-- 고통 바 시각화 -->
-    <div class="pain-section">
-      <div class="section-label">심리적 체감 강도 비교</div>
-      <div class="pain-label">이득의 기쁨</div>
-      <div class="pain-bar-wrap">
-        <div class="pain-bar-gain" id="bar-gain" style="width:44.4%">
-          <span class="bar-text" id="bar-gain-txt">기준</span>
-        </div>
-      </div>
-      <div class="pain-label">손실의 고통 (× 2.25배)</div>
-      <div class="pain-bar-wrap">
-        <div class="pain-bar-loss" id="bar-loss" style="width:100%">
-          <span class="bar-text" id="bar-loss-txt">2.25배</span>
-        </div>
-      </div>
-      <div class="pain-stat">
-        <span id="ps-gain">이득 ₩1,000,000 → 심리 점수 1.0</span>
-        <span id="ps-loss">손실 ₩1,000,000 → 심리 점수 2.25</span>
-      </div>
-    </div>
+    <div class="section-label">심리적 체감 강도 비교</div>
+    <div class="pain-label">이득의 기쁨</div>
+    <div class="pain-bar-wrap"><div class="pain-bar-gain" id="bar-gain" style="width:44.4%"><span class="bar-text">기준 ×1.0</span></div></div>
+    <div class="pain-label">손실의 고통 (× 2.25배)</div>
+    <div class="pain-bar-wrap"><div class="pain-bar-loss" id="bar-loss" style="width:100%"><span class="bar-text">고통 ×2.25</span></div></div>
+    <div class="pain-stat"><span id="ps-gain">이득 ₩1,000,000 → 심리 점수 1.0</span><span id="ps-loss">손실 ₩1,000,000 → 심리 점수 2.25</span></div>
 
-    <!-- 차트: 가치 함수 곡선 -->
-    <div class="chart-section">
-      <div class="section-label">프로스펙트 이론 — 가치 함수 곡선</div>
-      <div class="chart-wrap"><canvas id="chart3"></canvas></div>
-    </div>
+    <div class="section-label">프로스펙트 이론 — 가치 함수 곡선</div>
+    <div class="chart-wrap"><canvas id="chart2"></canvas></div>
 
     <div class="insight red">
       <b class="r">왜 손절이 어려울까요?</b><br>
-      -10만원의 고통이 +10만원의 기쁨보다 2.25배 강하기 때문에, 뇌는 손실 확정을 본능적으로 거부합니다. 이건 의지의 문제가 아니라 <b class="r">진화가 만든 생존 본능</b>입니다.<br><br>
-      <b class="y">출처: Kahneman & Tversky (1979). Prospect Theory: An Analysis of Decision under Risk. Econometrica, 47(2), 263–291.</b>
+      -10만원의 고통이 +10만원의 기쁨보다 2.25배 강하기 때문에 뇌는 손실 확정을 본능적으로 거부합니다. 이건 의지가 아니라 <b class="r">진화가 만든 생존 본능</b>입니다.<br><br>
+      <b class="y">📚 Kahneman &amp; Tversky (1979). Prospect Theory. Econometrica, 47(2), 263–291.</b>
     </div>
 
-  </div><!-- /panel-2 -->
-
-  <div class="footer">
-    <b>노센스</b> · 경제·투자 인사이트 유튜브 채널 · 손절의 미학
   </div>
+
+  <div class="footer"><b>노센스</b> · 경제·투자 인사이트 유튜브 채널 · 손절의 미학</div>
 </div>
 
 <script>
-/* ══════════════════════════════
+/* ═══════════════════════
+   프리셋 데이터
+═══════════════════════ */
+const PRESETS = {
+  lig: {
+    name:'LIG넥스원', code:'079550',
+    price:794000, qty:10, titleColor:'o',
+    tagText:'오늘 상한가 종목 적용',
+    titleHTML:'오늘 <em class="o">LIG넥스원</em> 고점에서 샀다면<br>손절가는 <em class="r">얼마</em>일까',
+    desc:'2026년 4월 1일 LIG넥스원 +29.95% 급등. Shefrin &amp; Statman(1985) — 고점 매수 후 손절가를 반드시 미리 설정해야 처분 효과를 막을 수 있습니다.',
+    ctrlClass:'orange', outClass:'o',
+    boxClass:'orange', insightClass:'orange',
+    sliderMax:1200000
+  },
+  sam: {
+    name:'삼성전자', code:'005930',
+    price:189600, qty:50, titleColor:'b',
+    tagText:'오늘 급등 종목 적용',
+    titleHTML:'오늘 <em style="color:var(--sam-light)">삼성전자</em> 고점에서 샀다면<br>손절가는 <em class="r">얼마</em>일까',
+    desc:'2026년 4월 1일 삼성전자 +13.40% 급등 (KRX 종가 기준). 매수 후 손절 기준을 미리 정해두지 않으면 처분 효과로 손실이 눈덩이처럼 불어납니다.',
+    ctrlClass:'', outClass:'b',
+    boxClass:'danger', insightClass:'red',
+    sliderMax:280000
+  },
+  custom: {
+    name:'직접 입력 종목', code:'CUSTOM',
+    price:50000, qty:100, titleColor:'g',
+    tagText:'내 종목 직접 입력',
+    titleHTML:'내 종목의 손절가를<br><em class="g">직접</em> 계산해 보세요',
+    desc:'매수 단가와 수량을 직접 입력하거나 슬라이더로 조작해 나만의 손절 가격을 확인하세요.',
+    ctrlClass:'', outClass:'g',
+    boxClass:'danger', insightClass:'red',
+    sliderMax:1000000
+  }
+};
+
+let currentPreset = 'lig';
+let chart1Instance = null;
+let chart2Instance = null;
+
+/* ═══════════════════════
+   유틸
+═══════════════════════ */
+function fmt(n){return '₩'+Math.round(n).toLocaleString('ko-KR');}
+
+/* ═══════════════════════
    탭 전환
-══════════════════════════════ */
+═══════════════════════ */
 function switchTab(idx){
   document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active',i===idx));
   document.querySelectorAll('.panel').forEach((p,i)=>p.classList.toggle('active',i===idx));
-  if(idx===1) setTimeout(()=>calcRecovery(),50);
-  if(idx===2) setTimeout(()=>calcPain(),50);
+  if(idx===1) setTimeout(calcRecovery,50);
+  if(idx===2) setTimeout(calcPain,50);
 }
 
-/* ══════════════════════════════
-   패널 1: 손절가 계산기
-══════════════════════════════ */
-function fmt(n){return '₩'+Math.round(n).toLocaleString('ko-KR');}
-function fmtPct(n){return (n>=0?'+':'')+n.toFixed(1)+'%';}
+/* ═══════════════════════
+   프리셋 로드
+═══════════════════════ */
+function loadPreset(key){
+  currentPreset = key;
+  const p = PRESETS[key];
 
+  // 버튼 active
+  document.querySelectorAll('.preset-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelector('.preset-btn.'+key).classList.add('active');
+
+  // 히어로 업데이트
+  document.getElementById('p0-tag').textContent = p.tagText;
+  document.getElementById('p0-title').innerHTML = p.titleHTML;
+  document.getElementById('p0-desc').innerHTML = p.desc;
+
+  // 수동 입력 영역
+  const customArea = document.getElementById('custom-area');
+  const buyCtrl = document.getElementById('buy-ctrl');
+  if(key === 'custom'){
+    customArea.style.display = 'block';
+    buyCtrl.style.display = 'none';
+    document.getElementById('manual-buy').value = p.price;
+    document.getElementById('manual-qty').value = p.qty;
+  } else {
+    customArea.style.display = 'none';
+    buyCtrl.style.display = 'flex';
+  }
+
+  // 슬라이더 업데이트 — min 먼저, max, 그다음 value 순서로 안전하게 세팅
+  const buySlider = document.getElementById('r0-buy');
+  buySlider.min   = 1000;
+  buySlider.max   = p.sliderMax;
+  buySlider.step  = p.sliderMax > 500000 ? 1000 : 100;
+  buySlider.value = p.price;
+  // 스타일 클래스 안전하게 교체
+  buySlider.classList.remove('orange','red');
+  if(p.ctrlClass) buySlider.classList.add(p.ctrlClass);
+
+  // 출력 레이블도 미리 세팅 (calcStop 호출 전 깜빡임 방지)
+  document.getElementById('o0-buy').textContent  = fmt(p.price);
+  document.getElementById('o0-buy').className    = 'ctrl-out '+(p.outClass||'g');
+  document.getElementById('o0-qty').textContent  = p.qty+'주';
+  document.getElementById('r0-qty').value        = p.qty;
+
+  // 카드 색상도 미리 세팅
+  document.getElementById('c0-buy').className    = 'card-value '+(p.outClass||'g');
+
+  // 결과 박스 / 인사이트 색상 클래스 확실히 교체
+  const resultBox = document.querySelector('#panel-0 .result-box');
+  if(resultBox) resultBox.className = 'result-box ' + p.boxClass;
+  const insightEl = document.getElementById('insight-stop');
+  if(insightEl) insightEl.className = 'insight ' + p.insightClass;
+
+  calcStop();
+}
+
+// 슬라이더 → 수동입력 동기화
+function syncQtyFromSlider(){
+  const slider = document.getElementById('r0-qty');
+  const qty = parseInt(slider.value) || 1;
+  if(currentPreset === 'custom'){
+    document.getElementById('manual-qty').value = qty;
+  }
+  document.getElementById('o0-qty').textContent = qty + '주';
+  calcStop();
+}
+
+// 수동입력 → 슬라이더 동기화
+function syncQtyFromInput(){
+  const inp = document.getElementById('manual-qty');
+  const qty = parseInt(inp.value) || 1;
+  const slider = document.getElementById('r0-qty');
+  slider.value = Math.min(qty, 1000);
+  document.getElementById('o0-qty').textContent = qty + '주';
+  calcStop();
+}
+
+// 하위 호환
+function onManualBuy(){
+  syncQtyFromInput();
+}
+
+/* ═══════════════════════
+   패널 0: 손절가 계산
+═══════════════════════ */
 function calcStop(){
-  const buy = +document.getElementById('r1-buy').value;
-  const qty = +document.getElementById('r1-qty').value;
-  const pct = +document.getElementById('r1-pct').value;
+  const p = PRESETS[currentPreset];
+  let buy, qty;
 
-  document.getElementById('o1-buy').textContent = fmt(buy);
-  document.getElementById('o1-qty').textContent = qty+'주';
-  document.getElementById('o1-pct').textContent = '-'+pct.toFixed(1)+'%';
+  if(currentPreset === 'custom'){
+    buy = parseFloat(document.getElementById('manual-buy').value) || p.price;
+    // 수동입력과 슬라이더 중 더 최근에 바뀐 값을 우선 — 둘 다 항상 동기화되므로 manual-qty 사용
+    const manualQtyVal = parseInt(document.getElementById('manual-qty').value);
+    const sliderQtyVal = parseInt(document.getElementById('r0-qty').value);
+    qty = manualQtyVal || sliderQtyVal || p.qty;
+  } else {
+    buy = parseFloat(document.getElementById('r0-buy').value);
+    qty = parseInt(document.getElementById('r0-qty').value);
+    if(!buy || buy <= 0) buy = p.price;
+    if(!qty || qty <= 0) qty = p.qty;
+  }
+
+  const pct = +document.getElementById('r0-pct').value;
+
+  // 슬라이더 표시 업데이트
+  document.getElementById('o0-buy').textContent = fmt(buy);
+  document.getElementById('o0-qty').textContent = qty+'주';
+  document.getElementById('o0-pct').textContent = '-'+pct.toFixed(1)+'%';
+
+  // 컬러 클래스 적용
+  const outBuy = document.getElementById('o0-buy');
+  outBuy.className = 'ctrl-out '+(p.outClass||'g');
 
   const stopPrice = buy * (1 - pct/100);
   const totalBuy  = buy * qty;
   const lossAmt   = (buy - stopPrice) * qty;
   const remain    = totalBuy - lossAmt;
 
-  document.getElementById('c1-buy').textContent      = fmt(buy);
-  document.getElementById('c1-stop').textContent     = fmt(stopPrice);
-  document.getElementById('r1-total').textContent    = fmt(totalBuy);
-  document.getElementById('r1-stopprice').textContent= fmt(stopPrice);
-  document.getElementById('r1-lossamount').textContent= '-'+fmt(lossAmt);
-  document.getElementById('r1-remain').textContent   = fmt(remain);
-  document.getElementById('c1-loss').textContent     = '-'+fmt(lossAmt);
+  document.getElementById('c0-buy').textContent       = fmt(buy);
+  document.getElementById('c0-buy').className         = 'card-value '+(p.outClass||'g');
+  document.getElementById('c0-stop').textContent      = fmt(stopPrice);
+  document.getElementById('c0-loss').textContent      = '-'+fmt(lossAmt);
+  document.getElementById('r0-name').textContent      = p.name;
+  document.getElementById('r0-name').className        = 'result-val '+(p.outClass||'g');
+  document.getElementById('r0-total').textContent     = fmt(totalBuy);
+  document.getElementById('r0-stopprice').textContent = fmt(stopPrice);
+  document.getElementById('r0-lossamount').textContent= '-'+fmt(lossAmt);
+  document.getElementById('r0-remain').textContent    = fmt(remain);
 
-  const pctLabel = pct.toFixed(1);
-  const nextNeed = (100 / (100 - pct) - 1) * 100;
-
+  const doubleLossPct = Math.min(pct * 2, 80);
+  const doubleLossRecovery = doubleLossPct < 100 ? ((100/(100-doubleLossPct)-1)*100).toFixed(1) : '∞';
   document.getElementById('insight-stop').innerHTML =
-    `지금 <b class="r">-${pctLabel}%</b> 손절하면 <b class="y">${fmt(lossAmt)}</b>의 손실로 끝납니다.`+
-    ` 하지만 그냥 들고 버텨 <b class="r">-${(pct*2).toFixed(0)}%</b>가 되면 원금 복구에 <b class="r">+${(100/(100-pct*2)-1)*100 > 0 ? ((100/(100-pct*2)-1)*100).toFixed(1) : '?'}%</b>가 필요합니다.`+
-    ` 빠른 손절이 자본을 지킵니다.`;
+    `<b>${p.name}</b> ${fmt(buy)} 매수 시 <b class="r">-${pct.toFixed(1)}%</b> 손절가는 <b class="r">${fmt(stopPrice)}</b>입니다.`+
+    ` 손실금액 <b class="r">${fmt(lossAmt)}</b>로 끝낼 수 있어요.`+
+    ` 만약 손절 못 하고 <b class="r">-${doubleLossPct.toFixed(0)}%</b>까지 버티면`+
+    ` 원금 회복에 <b class="r">+${doubleLossRecovery}%</b>가 필요합니다.`;
 }
 
-/* ══════════════════════════════
-   패널 2: 손실 복구 계산기
-══════════════════════════════ */
-let chart2Instance = null;
-
+/* ═══════════════════════
+   패널 1: 복구 계산
+═══════════════════════ */
 function calcRecovery(){
-  const p    = +document.getElementById('r2-p').value;
-  const loss = +document.getElementById('r2-loss').value;
+  const p    = +document.getElementById('r1-p').value;
+  const loss = +document.getElementById('r1-loss').value;
 
-  document.getElementById('o2-p').textContent    = fmt(p);
-  document.getElementById('o2-loss').textContent = '-'+loss+'%';
+  document.getElementById('o1-p').textContent    = fmt(p);
+  document.getElementById('o1-loss').textContent = '-'+loss+'%';
 
   const after  = p * (1 - loss/100);
   const needed = (p/after - 1) * 100;
 
-  document.getElementById('c2-principal').textContent = fmt(p);
-  document.getElementById('c2-after').textContent     = fmt(after);
-  document.getElementById('c2-need').textContent      = '+'+needed.toFixed(1)+'%';
+  document.getElementById('c1-p').textContent     = fmt(p);
+  document.getElementById('c1-after').textContent = fmt(after);
+  document.getElementById('c1-need').textContent  = '+'+needed.toFixed(1)+'%';
 
-  // 복구 테이블
-  const rows = [5,8,10,15,20,30,40,50];
+  // 테이블
+  const rows = [5,8,10,15,20,30,40,50,60];
   const tbody = document.getElementById('rtbody');
   tbody.innerHTML = '';
-  rows.forEach(l => {
-    const af  = p * (1 - l/100);
-    const nd  = (p/af - 1) * 100;
-    const yrs = Math.log(p/af) / Math.log(1.07);
-    const isCurrent = l === loss;
-    const tr = document.createElement('tr');
-    if(isCurrent) tr.className='current';
-    tr.innerHTML =
-      `<td class="loss-col">-${l}%</td>`+
-      `<td>${fmt(af)}</td>`+
-      `<td class="need-col">+${nd.toFixed(1)}%</td>`+
-      `<td class="time-col">${yrs.toFixed(1)}년</td>`;
+  rows.forEach(l=>{
+    const af  = p*(1-l/100);
+    const nd  = (p/af-1)*100;
+    const yrs = Math.log(p/af)/Math.log(1.07);
+    const tr  = document.createElement('tr');
+    if(l===loss) tr.className='current';
+    tr.innerHTML = `<td style="color:var(--red)">-${l}%</td><td>${fmt(af)}</td><td style="color:var(--yellow)">+${nd.toFixed(1)}%</td><td style="color:var(--blue)">${yrs.toFixed(1)}년</td>`;
     tbody.appendChild(tr);
   });
 
   // 차트
-  const lossPoints = Array.from({length:79},(_,i)=>i+1);
-  const needPoints = lossPoints.map(l => (100/(100-l)-1)*100);
+  const lp  = Array.from({length:79},(_,i)=>i+1);
+  const np  = lp.map(l=>(100/(100-l)-1)*100);
+  if(chart1Instance) chart1Instance.destroy();
+  chart1Instance = new Chart(document.getElementById('chart1'),{
+    type:'line',
+    data:{
+      labels:lp.map(l=>'-'+l+'%'),
+      datasets:[
+        {label:'필요 복구 수익률',data:np,borderColor:'#ff4d6a',backgroundColor:'rgba(255,77,106,0.08)',fill:true,tension:0.2,pointRadius:0,borderWidth:2.5},
+        {label:'현재 손실',data:lp.map(l=>l===loss?(100/(100-l)-1)*100:null),borderColor:'#ffd166',backgroundColor:'#ffd166',pointRadius:8,borderWidth:0,showLine:false,pointBackgroundColor:'#ffd166'}
+      ]
+    },
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false},tooltip:{backgroundColor:'#1c1c23',borderColor:'rgba(255,255,255,0.1)',borderWidth:1,titleColor:'#eeeef0',bodyColor:'#999aaa',callbacks:{label:ctx=>ctx.datasetIndex===0?' 필요 수익률: +'+ctx.parsed.y.toFixed(1)+'%':' ← 현재 손실'}}},
+      scales:{
+        x:{ticks:{autoSkip:true,maxTicksLimit:10,font:{size:10},color:'#666672'},grid:{color:'rgba(255,255,255,0.04)'},border:{color:'rgba(255,255,255,0.06)'}},
+        y:{ticks:{callback:v=>'+'+v.toFixed(0)+'%',font:{size:10},color:'#666672'},grid:{color:'rgba(255,255,255,0.04)'},border:{color:'rgba(255,255,255,0.06)'}}
+      }}
+  });
+
+  document.getElementById('insight-rec').innerHTML =
+    `<b class="r">-${loss}%</b> 손실 시 잔액은 <b class="r">${fmt(after)}</b>입니다.`+
+    ` 원금 회복에 <b class="y">+${needed.toFixed(1)}%</b>의 수익이 필요하며,`+
+    ` 연 7% 기준 <b class="g">${(Math.log(p/after)/Math.log(1.07)).toFixed(1)}년</b>이 걸립니다.`+
+    ` <b class="g">손절은 시간을 사는 것입니다.</b>`;
+}
+
+/* ═══════════════════════
+   패널 2: 고통 시각화
+═══════════════════════ */
+function calcPain(){
+  const amt = +document.getElementById('r2-amt').value;
+  document.getElementById('o2-amt').textContent = fmt(amt);
+  document.getElementById('bar-gain').style.width = (1/2.25*100)+'%';
+  document.getElementById('ps-gain').textContent = '이득 '+fmt(amt)+' → 심리 점수 1.0';
+  document.getElementById('ps-loss').textContent = '손실 '+fmt(amt)+' → 심리 점수 2.25';
+
+  const xs    = Array.from({length:200},(_,i)=>i-100);
+  const gains = xs.filter(x=>x>=0);
+  const losses= xs.filter(x=>x<=0);
+  const gd    = gains.map(x=>({x,y:Math.pow(x,0.88)}));
+  const ld    = losses.map(x=>({x,y:-2.25*Math.pow(-x,0.88)}));
 
   if(chart2Instance) chart2Instance.destroy();
   chart2Instance = new Chart(document.getElementById('chart2'),{
     type:'line',
-    data:{
-      labels: lossPoints.map(l=>'-'+l+'%'),
-      datasets:[{
-        label:'필요 복구 수익률',
-        data: needPoints,
-        borderColor:'#ff4d6a',
-        backgroundColor:'rgba(255,77,106,0.08)',
-        fill:true, tension:0.2, pointRadius:0, borderWidth:2.5
-      },{
-        label:'현재 손실',
-        data: lossPoints.map(l => l===loss ? (100/(100-l)-1)*100 : null),
-        borderColor:'#ffd166',
-        backgroundColor:'#ffd166',
-        pointRadius:8, pointHoverRadius:10,
-        borderWidth:0, showLine:false,
-        pointBackgroundColor:'#ffd166'
-      }]
-    },
-    options:{
-      responsive:true, maintainAspectRatio:false,
-      interaction:{mode:'index',intersect:false},
-      plugins:{
-        legend:{display:false},
-        tooltip:{
-          backgroundColor:'#1c1c23', borderColor:'rgba(255,255,255,0.1)', borderWidth:1,
-          titleColor:'#eeeef0', bodyColor:'#999aaa',
-          callbacks:{
-            label: ctx => {
-              if(ctx.datasetIndex===0) return ' 필요 수익률: +'+ctx.parsed.y.toFixed(1)+'%';
-              return ' ← 현재 손실';
-            }
-          }
-        }
-      },
+    data:{datasets:[
+      {label:'이득 (기쁨)',data:gd,borderColor:'#00e5a0',backgroundColor:'rgba(0,229,160,0.07)',fill:true,tension:0,pointRadius:0,borderWidth:2.5},
+      {label:'손실 (고통)',data:ld,borderColor:'#ff4d6a',backgroundColor:'rgba(255,77,106,0.07)',fill:true,tension:0,pointRadius:0,borderWidth:2.5}
+    ]},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:true,position:'top',labels:{color:'#999aaa',font:{size:11},boxWidth:10,padding:14}},tooltip:{enabled:false}},
       scales:{
-        x:{
-          ticks:{autoSkip:true,maxTicksLimit:10,font:{size:10},color:'#666672'},
-          grid:{color:'rgba(255,255,255,0.04)'},
-          border:{color:'rgba(255,255,255,0.06)'}
-        },
-        y:{
-          ticks:{callback:v=>'+'+v.toFixed(0)+'%',font:{size:10},color:'#666672'},
-          grid:{color:'rgba(255,255,255,0.04)'},
-          border:{color:'rgba(255,255,255,0.06)'}
-        }
-      }
-    }
-  });
-
-  document.getElementById('insight-recovery').innerHTML =
-    `<b class="r">-${loss}%</b> 손실 시 잔액은 <b class="r">${fmt(after)}</b>입니다.`+
-    ` 원금을 회복하려면 <b class="y">+${needed.toFixed(1)}%</b>의 수익이 필요하며,`+
-    ` 연 7% 수익률 기준으로 <b class="g">${(Math.log(p/after)/Math.log(1.07)).toFixed(1)}년</b>이 걸립니다.`+
-    ` <b class="g">손절은 시간을 사는 것입니다.</b>`;
-}
-
-/* ══════════════════════════════
-   패널 3: 손실 고통 시각화
-══════════════════════════════ */
-let chart3Instance = null;
-
-function calcPain(){
-  const amt = +document.getElementById('r3-amt').value;
-  document.getElementById('o3-amt').textContent = fmt(amt);
-
-  const gainScore = 1.0;
-  const lossScore = 2.25;
-
-  document.getElementById('c3-gain').textContent  = '심리 점수 1.0';
-  document.getElementById('c3-loss').textContent  = '심리 점수 2.25';
-  document.getElementById('c3-extra').textContent = '+125%';
-
-  // 바 업데이트
-  const gainW = (1/2.25)*100;
-  document.getElementById('bar-gain').style.width = gainW+'%';
-  document.getElementById('bar-gain-txt').textContent = '기준 (×1.0)';
-  document.getElementById('bar-loss-txt').textContent = '고통 (×2.25)';
-  document.getElementById('ps-gain').textContent = '이득 '+fmt(amt)+' → 심리 점수 1.0';
-  document.getElementById('ps-loss').textContent = '손실 '+fmt(amt)+' → 심리 점수 2.25';
-
-  // 가치 함수 곡선
-  const xs = Array.from({length:200},(_,i)=>(i-100));
-  const gains = xs.filter(x=>x>=0);
-  const losses = xs.filter(x=>x<=0);
-
-  const valueGain = x => Math.pow(x,0.88);
-  const valueLoss = x => -2.25 * Math.pow(-x, 0.88);
-
-  const gainData  = gains.map(x=>({x,y:valueGain(x)}));
-  const lossData  = losses.map(x=>({x,y:valueLoss(x)}));
-
-  if(chart3Instance) chart3Instance.destroy();
-  chart3Instance = new Chart(document.getElementById('chart3'),{
-    type:'line',
-    data:{
-      datasets:[
-        {
-          label:'이득 영역 (기쁨)',
-          data: gainData,
-          borderColor:'#00e5a0',
-          backgroundColor:'rgba(0,229,160,0.07)',
-          fill:true, tension:0, pointRadius:0, borderWidth:2.5
-        },
-        {
-          label:'손실 영역 (고통)',
-          data: lossData,
-          borderColor:'#ff4d6a',
-          backgroundColor:'rgba(255,77,106,0.07)',
-          fill:true, tension:0, pointRadius:0, borderWidth:2.5
-        }
-      ]
-    },
-    options:{
-      responsive:true, maintainAspectRatio:false,
-      plugins:{
-        legend:{
-          display:true,
-          position:'top',
-          labels:{color:'#999aaa',font:{size:11},boxWidth:10,padding:14}
-        },
-        tooltip:{enabled:false},
-        annotation:{}
-      },
-      scales:{
-        x:{
-          type:'linear',
-          title:{display:true,text:'이득 / 손실 (금액)',color:'#666672',font:{size:10}},
-          ticks:{color:'#666672',font:{size:10},callback:v=>v===0?'0':v>0?'+'+v:v},
-          grid:{color:'rgba(255,255,255,0.04)'},
-          border:{color:'rgba(255,255,255,0.06)'}
-        },
-        y:{
-          title:{display:true,text:'심리적 가치',color:'#666672',font:{size:10}},
-          ticks:{color:'#666672',font:{size:10}},
-          grid:{
-            color:ctx=>ctx.tick.value===0?'rgba(255,255,255,0.15)':'rgba(255,255,255,0.04)'
-          },
-          border:{color:'rgba(255,255,255,0.06)'}
-        }
-      }
-    }
+        x:{type:'linear',ticks:{color:'#666672',font:{size:10},callback:v=>v===0?'0':v>0?'+'+v:v},grid:{color:'rgba(255,255,255,0.04)'},border:{color:'rgba(255,255,255,0.06)'}},
+        y:{ticks:{color:'#666672',font:{size:10}},grid:{color:ctx=>ctx.tick.value===0?'rgba(255,255,255,0.15)':'rgba(255,255,255,0.04)'},border:{color:'rgba(255,255,255,0.06)'}}
+      }}
   });
 }
 
-/* ══════════════════════════════
+/* ═══════════════════════
    초기화
-══════════════════════════════ */
+═══════════════════════ */
 window.addEventListener('load',()=>{
-  calcStop();
+  loadPreset('lig');
 });
 </script>
-</body>
-</html>
+
+
+</body></html>
