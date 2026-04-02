@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- saved from url=(0062)file:///C:/Users/blogh/Downloads/stoploss_calculator_v2_6.html -->
+<!-- saved from url=(0062)file:///C:/Users/blogh/Downloads/stoploss_calculator_v2_7.html -->
 <html lang="ko"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -208,7 +208,10 @@ input[type=range].orange::-webkit-slider-thumb{background:var(--lig);box-shadow:
       <div class="brand-logo">NS</div>
       <div>
         <div class="brand-name">노센스</div>
-        <div class="brand-sub">경제·투자 인사이트</div>
+        <div style="display:flex;align-items:center;gap:7px;">
+          <div class="brand-sub">경제·투자 인사이트</div>
+          <span style="font-size:9px;font-weight:700;letter-spacing:1px;color:#0c0c10;background:var(--accent);border-radius:3px;padding:1px 6px;line-height:1.6;">v1.0</span>
+        </div>
       </div>
     </div>
     <a class="yt-btn" href="https://www.youtube.com/@KnowSense_KR" target="_blank">
@@ -258,8 +261,8 @@ input[type=range].orange::-webkit-slider-thumb{background:var(--lig);box-shadow:
   <!-- 탭 -->
   <div class="tabs">
     <button class="tab" onclick="switchTab(0)">📉 손절가 계산기</button>
-    <button class="tab" onclick="switchTab(1)">🔁 손실 복구 계산기</button>
-    <button class="tab active" onclick="switchTab(2)">🧠 손실 고통 시각화</button>
+    <button class="tab active" onclick="switchTab(1)">🔁 손실 복구 계산기</button>
+    <button class="tab" onclick="switchTab(2)">🧠 손실 고통 시각화</button>
   </div>
 
   <!-- ══════════════════════════════
@@ -321,7 +324,7 @@ input[type=range].orange::-webkit-slider-thumb{background:var(--lig);box-shadow:
   <!-- ══════════════════════════════
        패널 1: 손실 복구 계산기
   ══════════════════════════════ -->
-  <div class="panel" id="panel-1">
+  <div class="panel active" id="panel-1">
 
     <div class="hero">
       <div class="hero-tag red">손실 복구 계산기</div>
@@ -349,7 +352,7 @@ input[type=range].orange::-webkit-slider-thumb{background:var(--lig);box-shadow:
     </div>
 
     <div class="section-label">손실률별 복구 필요 수익률</div>
-    <div class="chart-wrap"><canvas id="chart1" height="240" width="680" style="display: block; box-sizing: border-box; height: 240px; width: 680px;"></canvas></div>
+    <div class="chart-wrap"><canvas id="chart1" height="240" style="width: 100%; display: block; box-sizing: border-box;" width="680"></canvas></div>
 
     <div class="section-label">주요 손절 타이밍 비교</div>
     <table class="recovery-table">
@@ -364,7 +367,7 @@ input[type=range].orange::-webkit-slider-thumb{background:var(--lig);box-shadow:
   <!-- ══════════════════════════════
        패널 2: 손실 고통 시각화
   ══════════════════════════════ -->
-  <div class="panel active" id="panel-2">
+  <div class="panel" id="panel-2">
 
     <div class="hero">
       <div class="hero-tag green">논문 기반 심리 시각화</div>
@@ -388,13 +391,13 @@ input[type=range].orange::-webkit-slider-thumb{background:var(--lig);box-shadow:
 
     <div class="section-label">심리적 체감 강도 비교</div>
     <div class="pain-label">이득의 기쁨</div>
-    <div class="pain-bar-wrap"><div class="pain-bar-gain" id="bar-gain" style="width: 44.4444%;"><span class="bar-text">기준 ×1.0</span></div></div>
+    <div class="pain-bar-wrap"><div class="pain-bar-gain" id="bar-gain" style="width:44.4%"><span class="bar-text">기준 ×1.0</span></div></div>
     <div class="pain-label">손실의 고통 (× 2.25배)</div>
     <div class="pain-bar-wrap"><div class="pain-bar-loss" id="bar-loss" style="width:100%"><span class="bar-text">고통 ×2.25</span></div></div>
     <div class="pain-stat"><span id="ps-gain">이득 ₩1,000,000 → 심리 점수 1.0</span><span id="ps-loss">손실 ₩1,000,000 → 심리 점수 2.25</span></div>
 
     <div class="section-label">프로스펙트 이론 — 가치 함수 곡선</div>
-    <div class="chart-wrap"><canvas id="chart2" height="240" width="680" style="display: block; box-sizing: border-box; height: 240px; width: 680px;"></canvas></div>
+    <div class="chart-wrap"><canvas id="chart2" style="width: 100%;"></canvas></div>
 
     <div class="insight red">
       <b class="r">왜 손절이 어려울까요?</b><br>
